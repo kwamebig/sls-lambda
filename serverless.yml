@@ -1,0 +1,25 @@
+service: final
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: java11
+  region: us-east-2
+  timeout: 10
+  memorySize: 1024
+  lambdaHashingVersion: 20201221
+
+package:
+  artifact: target/calculator-standalone.jar
+
+
+functions:
+  simpleLambda:
+    handler: task.core.ApiHandler
+  simpleHttp:
+    handler: task.core.ApiHandler
+    events:
+      - httpApi:
+          method: POST
+          path: /dev/calc
